@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Ceritanya Wisuda</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    * {
+      font-family: "Times New Roman", Times, serif;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #f4f4f4;
+      padding: 20px;
+    }
+
+    .form-box {
+      max-width: 500px;
+      background: #ffffff;
+      margin: 60px auto;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .judul {
+      font-size: 18px;
+      line-height: 1.5;
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    label {
+      font-size: 14px;
+      display: block;
+      margin-bottom: 6px;
+      margin-top: 15px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      font-size: 14px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 25px;
+      padding: 12px;
+      background: #25D366;
+      color: #ffffff;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="form-box">
+    <div class="judul">
+      Hi Kak Ini Ceritanya Wisuda.<br>
+      Senang bisa bertemu di momen spesialmu,<br>
+      Kami dengan senang hati siap membantu mengabadikannya
+    </div>
+
+    <label>Nama</label>
+    <input type="text" id="nama" placeholder="Masukkan nama kamu">
+
+    <label>Kampus</label>
+    <input type="text" id="kampus" placeholder="Nama kampus">
+
+    <label>Tanggal Wisuda</label>
+    <input type="date" id="tanggal">
+
+    <button onclick="kirimWA()">Chat Mince Yaw</button>
+  </div>
+
+  <script>
+    function kirimWA() {
+      var nama = document.getElementById("nama").value;
+      var kampus = document.getElementById("kampus").value;
+      var tanggal = document.getElementById("tanggal").value;
+
+      if (!nama || !kampus || !tanggal) {
+        alert("Mohon lengkapi semua data terlebih dahulu");
+        return;
+      }
+
+      var namaBulan = [
+        "Januari", "Februari", "Maret", "April",
+        "Mei", "Juni", "Juli", "Agustus",
+        "September", "Oktober", "November", "Desember"
+      ];
+
+      var hariList = [
+        "Minggu", "Senin", "Selasa",
+        "Rabu", "Kamis", "Jumat", "Sabtu"
+      ];
+
+      var dateObj = new Date(tanggal);
+      var hari = hariList[dateObj.getDay()];
+
+      var tgl = tanggal.split("-");
+      var tanggalFix =
+        hari + ", " +
+        tgl[2] + " " +
+        namaBulan[parseInt(tgl[1]) - 1] + " " +
+        tgl[0];
+
+      var nomorWA = "6285129787216";
+
+      var pesan =
+        "Halo Ceritanya Wisuda\n\n" +
+        "Boleh minta info pricelist, kak?\n\n" +
+        "Nama        : " + nama + "\n" +
+        "Kampus      : " + kampus + "\n" +
+        "Tgl Wisuda  : " + tanggalFix + "\n\n" +
+        "Terima kasih, kak";
+
+      var urlWA =
+        "https://api.whatsapp.com/send?phone=" +
+        nomorWA +
+        "&text=" +
+        encodeURIComponent(pesan);
+
+      window.open(urlWA, "_blank");
+    }
+  </script>
+
+</body>
+</html>
